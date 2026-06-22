@@ -16,14 +16,14 @@ for i in $(seq 1 288); do
   T=$(mktemp -d)
   if env -u CODEX_HOME timeout 90 codex exec --skip-git-repo-check --sandbox read-only \
        -C "$T" -c 'model_reasoning_effort="low"' "Reply with exactly: AUTHOK" >/dev/null 2>&1; then
-    echo "$(date) codex OK (attempt $i) — resuming remaining cells" >> "$LOG"
+    echo "$(date) codex OK (attempt $i) - resuming remaining cells" >> "$LOG"
     python3 benchmark/runner/run_all.py --run-id "$RUN_ID" --seeds 5 --timeout 360 >> "$LOG" 2>&1
     echo "$(date) resume run finished; analyzing" >> "$LOG"
     python3 benchmark/analysis/analyze.py "$RUN_ID" >> "$LOG" 2>&1
     echo "$(date) DONE" >> "$LOG"
     exit 0
   fi
-  echo "$(date) codex unavailable (attempt $i/288) — usage limit or auth; will retry" >> "$LOG"
+  echo "$(date) codex unavailable (attempt $i/288) - usage limit or auth; will retry" >> "$LOG"
   sleep 300
 done
 echo "$(date) gave up after 24h without working codex" >> "$LOG"

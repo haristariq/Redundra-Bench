@@ -10,7 +10,7 @@ of tasks whose correct solution is to call an existing helper, then measures how
 the agent actually reuses it, whether it stays correct, and how many tokens it spends.
 
 It runs as an A/B test. The same agent solves the same task twice: once on its own, and
-once with a reuse layer attached (here, the [Redundra](https://github.com/) MCP server).
+once with a reuse layer attached (here, the Redundra MCP server).
 The difference between the two arms is the signal.
 
 ## Headline results

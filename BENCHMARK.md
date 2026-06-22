@@ -7,7 +7,7 @@ what token cost. It is a paired A/B (layer on vs off on the identical task), not
 resolution-rate leaderboard, so its numbers are not comparable to SWE-bench resolution
 scores.
 
-The default system under test is the [Redundra](https://github.com/) MCP server, which
+The default system under test is the Redundra MCP server, which
 exposes reuse-discovery tools (`find_reusable`) and a draft-review tool (`review_draft`).
 Any MCP server can be swapped in.
 

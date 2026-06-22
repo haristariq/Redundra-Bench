@@ -1,5 +1,6 @@
 # Harness runtime artifacts
 benchmark/.codex_home/
+**/.codex_home/
 benchmark/results/
 __pycache__/
 *.pyc

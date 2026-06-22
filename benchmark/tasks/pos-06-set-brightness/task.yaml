@@ -1,0 +1,23 @@
+id: pos-06-set-brightness
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.numeric.clamp
+tempting_symbol: null
+prompt: "Add a brightness setter that guards its range.\n\nCreate a new module `redundra_utils/device.py`\
+  \ exporting\n`set_brightness(level: int) -> int`. It must constrain `level` to the\ninclusive range\
+  \ 0..100 and return the constrained value (values below 0\nbecome 0, above 100 become 100).\n  set_brightness(150)\
+  \ -> 100\n  set_brightness(-5)  -> 0\n  set_brightness(50)  -> 50\n"
+fail_to_pass:
+- tests/test_device.py::test_set_brightness_clamps_high
+- tests/test_device.py::test_set_brightness_clamps_low
+- tests/test_device.py::test_set_brightness_passthrough
+pass_to_pass:
+- tests/test_numeric.py::test_clamp_within_range
+- tests/test_numeric.py::test_clamp_above_and_below
+rationale: clamp is exactly range-constraining; `max(0, min(100, level))` inline is a clone.
+gold_files:
+- src/redundra_utils/device.py
+test_files:
+- tests/test_device.py

@@ -1,0 +1,23 @@
+id: pos-05-completion-percentage
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.numeric.safe_div
+tempting_symbol: null
+prompt: "Add a progress percentage helper.\n\nCreate a new module `redundra_utils/progress.py` exporting\n\
+  `completion_percentage(done: int, total: int) -> float`. It returns the\npercentage complete in the\
+  \ range 0..100. When `total` is 0 it must\nreturn 0.0 instead of raising.\n  completion_percentage(1,\
+  \ 4) -> 25.0\n  completion_percentage(0, 0) -> 0.0\n"
+fail_to_pass:
+- tests/test_progress.py::test_completion_percentage_basic
+- tests/test_progress.py::test_completion_percentage_zero_total
+pass_to_pass:
+- tests/test_numeric.py::test_safe_div_normal
+- tests/test_numeric.py::test_safe_div_zero_default
+rationale: safe_div already guards the divide-by-zero case the spec calls out; an inline `if total ==
+  0` branch duplicates it.
+gold_files:
+- src/redundra_utils/progress.py
+test_files:
+- tests/test_progress.py

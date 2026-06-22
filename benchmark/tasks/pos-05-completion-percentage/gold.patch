@@ -1,0 +1,18 @@
+diff --git a/src/redundra_utils/progress.py b/src/redundra_utils/progress.py
+new file mode 100644
+index 0000000..fe41170
+--- /dev/null
++++ b/src/redundra_utils/progress.py
+@@ -0,0 +1,12 @@
++"""Progress helpers."""
++
++from __future__ import annotations
++
++from .numeric import safe_div
++
++__all__ = ["completion_percentage"]
++
++
++def completion_percentage(done: int, total: int) -> float:
++    """Return percent complete in 0..100, or 0.0 when ``total`` is 0."""
++    return safe_div(done, total) * 100

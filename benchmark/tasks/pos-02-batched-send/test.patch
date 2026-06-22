@@ -1,0 +1,28 @@
+diff --git a/tests/test_notify.py b/tests/test_notify.py
+new file mode 100644
+index 0000000..187c5c7
+--- /dev/null
++++ b/tests/test_notify.py
+@@ -0,0 +1,22 @@
++import pytest
++
++from redundra_utils.notify import send_in_batches
++
++
++def test_send_in_batches_groups_and_counts():
++    seen = []
++    n = send_in_batches([1, 2, 3, 4, 5], 2, seen.append)
++    assert seen == [[1, 2], [3, 4], [5]]
++    assert n == 3
++
++
++def test_send_in_batches_exact_multiple():
++    seen = []
++    n = send_in_batches([1, 2, 3, 4], 2, seen.append)
++    assert seen == [[1, 2], [3, 4]]
++    assert n == 2
++
++
++def test_send_in_batches_invalid_size():
++    with pytest.raises(ValueError):
++        send_in_batches([1], 0, lambda b: None)

@@ -1,0 +1,26 @@
+id: pos-02-batched-send
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.collections_util.chunk
+tempting_symbol: null
+prompt: "Add batched delivery for a notification queue.\n\nCreate a new module `redundra_utils/notify.py`\
+  \ exporting\n`send_in_batches(items, size, sender) -> int`. It must split `items`\ninto consecutive\
+  \ groups of at most `size` items (the last group may be\nsmaller), call `sender(group)` once per group\
+  \ with a list, and return\nthe number of groups sent. `size` must be a positive integer; raise\nValueError\
+  \ otherwise. Order of items must be preserved.\n  send_in_batches([1,2,3,4,5], 2, sender) -> calls sender([1,2]),\n\
+  \  sender([3,4]), sender([5]); returns 3.\n"
+fail_to_pass:
+- tests/test_notify.py::test_send_in_batches_groups_and_counts
+- tests/test_notify.py::test_send_in_batches_exact_multiple
+- tests/test_notify.py::test_send_in_batches_invalid_size
+pass_to_pass:
+- tests/test_collections_util.py::test_chunk_even_and_remainder
+- tests/test_collections_util.py::test_chunk_invalid_size
+rationale: chunk already batches an iterable with the exact remainder + size-validation semantics required;
+  an inline accumulator loop duplicates it.
+gold_files:
+- src/redundra_utils/notify.py
+test_files:
+- tests/test_notify.py

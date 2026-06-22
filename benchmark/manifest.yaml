@@ -1,0 +1,106 @@
+benchmark: Redundra-Bench
+phase: 0
+pins:
+  fixture_repo: redundra-utils
+  fixture_commit: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+  fixture_tag: base-v0.1.0
+  codex_cli_version: codex-cli 0.138.0
+  node_version: v20.19.0
+  default_model: gpt-5.5 (Codex subscription) / deepseek/deepseek-v3.2 (OpenRouter)
+task_counts:
+  total: 13
+  extension: 2
+  negative: 3
+  positive: 8
+tasks:
+- id: ext-01-truncate-whole-words
+  klass: extension
+  reuse_target: redundra_utils.text.truncate
+  checksums:
+    task.yaml: df61193d754c3127
+    gold.patch: 9d8ca14cad416e7a
+    test.patch: dbe9bfb9b5971712
+- id: ext-02-safe-div-round
+  klass: extension
+  reuse_target: redundra_utils.numeric.safe_div
+  checksums:
+    task.yaml: ba97042021bd3227
+    gold.patch: 7c79fe7183b9e7bd
+    test.patch: c06e16369e609fd6
+- id: neg-01-clip-charset
+  klass: negative
+  reuse_target: null
+  checksums:
+    task.yaml: 693dfea9034bb68a
+    gold.patch: 5f4ac4eebc37e9ee
+    test.patch: 22289c314754ee55
+- id: neg-02-split-sections
+  klass: negative
+  reuse_target: null
+  checksums:
+    task.yaml: 2381e490b966991d
+    gold.patch: d0d0a81e58a284c0
+    test.patch: acee0edaf548affe
+- id: neg-03-shallow-override
+  klass: negative
+  reuse_target: null
+  checksums:
+    task.yaml: 971801e843dd479b
+    gold.patch: 9061da49da0d8921
+    test.patch: 39be7e878d956d5b
+- id: pos-01-url-path
+  klass: positive
+  reuse_target: redundra_utils.text.slugify
+  checksums:
+    task.yaml: 15d444f12ec58e5f
+    gold.patch: f0d78c971aa33b99
+    test.patch: aff466793e1b14de
+- id: pos-02-batched-send
+  klass: positive
+  reuse_target: redundra_utils.collections_util.chunk
+  checksums:
+    task.yaml: 12d0b5f468855cc3
+    gold.patch: 7b0abdfd1412d87c
+    test.patch: 362583c3b56a818a
+- id: pos-03-comment-preview
+  klass: positive
+  reuse_target: redundra_utils.text.truncate
+  checksums:
+    task.yaml: a9fe0e72a19f2d32
+    gold.patch: d71c1dc40e8a05b7
+    test.patch: bcf4f697ee5ee668
+- id: pos-04-load-settings
+  klass: positive
+  reuse_target: redundra_utils.collections_util.deep_merge
+  checksums:
+    task.yaml: a0371786162e657e
+    gold.patch: 6a54adb4de264ae9
+    test.patch: 02c93c34ecb779fb
+- id: pos-05-completion-percentage
+  klass: positive
+  reuse_target: redundra_utils.numeric.safe_div
+  checksums:
+    task.yaml: 71a5eae2aa1ad09a
+    gold.patch: 7b7db40540891201
+    test.patch: e858068f90c0b1b6
+- id: pos-06-set-brightness
+  klass: positive
+  reuse_target: redundra_utils.numeric.clamp
+  checksums:
+    task.yaml: 3c8aa1df7cda2510
+    gold.patch: da8de96a3307f15d
+    test.patch: 64390a60080057ec
+- id: pos-07-fetch-with-retry
+  klass: positive
+  reuse_target: redundra_utils.retrying.retry
+  checksums:
+    task.yaml: d21f53a7f92fcf58
+    gold.patch: 419a507b535bcab5
+    test.patch: 3ff738797bbde831
+- id: pos-08-clean-display-name
+  klass: positive
+  reuse_target: redundra_utils.text.normalize_whitespace
+  checksums:
+    task.yaml: 354aee69435348d8
+    gold.patch: 18b1a1f589dd7dd4
+    test.patch: 8f372a76bcb62111

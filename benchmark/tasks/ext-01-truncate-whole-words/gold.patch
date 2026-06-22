@@ -1,0 +1,47 @@
+diff --git a/src/redundra_utils/text.py b/src/redundra_utils/text.py
+index 1a11137..3b2f495 100644
+--- a/src/redundra_utils/text.py
++++ b/src/redundra_utils/text.py
+@@ -17,7 +17,7 @@ _NON_SLUG_RE = re.compile(r"[^a-z0-9]+")
+ def normalize_whitespace(text: str) -> str:
+     """Collapse every run of whitespace to a single space and strip the ends.
+ 
+-    >>> normalize_whitespace("  hello\\t world\\n")
++    >>> normalize_whitespace("  hello\t world\n")
+     'hello world'
+     """
+     return _WHITESPACE_RE.sub(" ", text).strip()
+@@ -39,15 +39,20 @@ def slugify(text: str) -> str:
+     return hyphenated.strip("-")
+ 
+ 
+-def truncate(text: str, length: int, suffix: str = "…") -> str:
++def truncate(text: str, length: int, suffix: str = "\u2026", whole_words: bool = False) -> str:
+     """Truncate ``text`` to at most ``length`` characters.
+ 
+     If truncation happens, ``suffix`` is appended and the total length never
+     exceeds ``length``. If ``length`` is smaller than ``suffix`` the suffix
+     itself is truncated.
+ 
++    When ``whole_words`` is true and truncation happens mid-word, the result is
++    trimmed back to the last word boundary so words are never cut in half.
++
+     >>> truncate("hello world", 8)
+-    'hello w…'
++    'hello w\u2026'
++    >>> truncate("hello world", 8, whole_words=True)
++    'hello\u2026'
+     >>> truncate("hi", 8)
+     'hi'
+     """
+@@ -57,4 +62,9 @@ def truncate(text: str, length: int, suffix: str = "…") -> str:
+         return text
+     if length <= len(suffix):
+         return suffix[:length]
+-    return text[: length - len(suffix)] + suffix
++    body = text[: length - len(suffix)]
++    if whole_words and not text[length - len(suffix)].isspace():
++        stripped = body.rstrip()
++        if " " in stripped:
++            body = stripped[: stripped.rfind(" ")].rstrip()
++    return body + suffix

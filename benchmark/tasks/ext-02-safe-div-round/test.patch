@@ -1,0 +1,19 @@
+diff --git a/tests/test_numeric_round.py b/tests/test_numeric_round.py
+new file mode 100644
+index 0000000..9b4ef22
+--- /dev/null
++++ b/tests/test_numeric_round.py
+@@ -0,0 +1,13 @@
++from redundra_utils.numeric import safe_div
++
++
++def test_safe_div_rounds_when_ndigits_given():
++    assert safe_div(1, 3, ndigits=2) == 0.33
++
++
++def test_safe_div_rounds_default_on_zero():
++    assert safe_div(1, 0, default=1.0 / 3, ndigits=2) == 0.33
++
++
++def test_safe_div_unchanged_without_ndigits():
++    assert safe_div(3, 4) == 0.75

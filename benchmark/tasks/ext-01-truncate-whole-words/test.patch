@@ -1,0 +1,19 @@
+diff --git a/tests/test_text_words.py b/tests/test_text_words.py
+new file mode 100644
+index 0000000..6272a61
+--- /dev/null
++++ b/tests/test_text_words.py
+@@ -0,0 +1,13 @@
++from redundra_utils.text import truncate
++
++
++def test_truncate_whole_words_trims_to_boundary():
++    assert truncate('hello world foo', 10, whole_words=True) == 'hello\u2026'
++
++
++def test_truncate_whole_words_default_still_cuts():
++    assert truncate('hello world foo', 10) == 'hello wor\u2026'
++
++
++def test_truncate_whole_words_no_truncation_needed():
++    assert truncate('hi there', 20, whole_words=True) == 'hi there'

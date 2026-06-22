@@ -1,0 +1,28 @@
+id: ext-01-truncate-whole-words
+klass: extension
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.text.truncate
+tempting_symbol: null
+prompt: "Extend truncation so it can avoid cutting words in half.\n\nAdd an optional keyword parameter\
+  \ `whole_words: bool = False` to the\nexisting `redundra_utils.text.truncate` function. When `whole_words`\
+  \ is\nTrue and truncation would cut in the middle of a word, trim the result\nback to the previous word\
+  \ boundary before appending the suffix, so words\nare never split. Default (False) behaviour must be\
+  \ unchanged.\n  truncate('hello world foo', 10)                    -> 'hello wor\\u2026'\n  truncate('hello\
+  \ world foo', 10, whole_words=True)  -> 'hello\\u2026'\n"
+fail_to_pass:
+- tests/test_text_words.py::test_truncate_whole_words_trims_to_boundary
+- tests/test_text_words.py::test_truncate_whole_words_default_still_cuts
+- tests/test_text_words.py::test_truncate_whole_words_no_truncation_needed
+pass_to_pass:
+- tests/test_text.py::test_truncate_appends_suffix_within_limit
+- tests/test_text.py::test_truncate_shorter_than_limit_unchanged
+- tests/test_text.py::test_truncate_tiny_limit
+- tests/test_text.py::test_truncate_negative_limit_raises
+rationale: Correct answer extends truncate with a new param; duplicating a near-copy `truncate_words`
+  alongside it is the anti-pattern this task detects.
+gold_files:
+- src/redundra_utils/text.py
+test_files:
+- tests/test_text_words.py

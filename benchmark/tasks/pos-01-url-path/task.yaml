@@ -1,0 +1,26 @@
+id: pos-01-url-path
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.text.slugify
+tempting_symbol: null
+prompt: "Add a helper that builds a clean URL path from a human page title.\n\nCreate a new module `redundra_utils/webhelpers.py`\
+  \ exporting a function\n`make_url_path(title: str) -> str`. It must return the title as a URL\npath:\
+  \ a leading '/' followed by a lower-cased, hyphen-separated form of\nthe title. Any run of non-alphanumeric\
+  \ characters becomes a single\nhyphen, and there must be no leading or trailing hyphen in the slug\n\
+  portion. Examples:\n  make_url_path('Hello, World!')  -> '/hello-world'\n  make_url_path('  Foo ---\
+  \ Bar ')  -> '/foo-bar'\n  make_url_path('!!!')             -> '/'\n"
+fail_to_pass:
+- tests/test_webhelpers.py::test_make_url_path_basic
+- tests/test_webhelpers.py::test_make_url_path_collapses_and_strips
+- tests/test_webhelpers.py::test_make_url_path_empty_slug
+pass_to_pass:
+- tests/test_text.py::test_slugify_basic
+- tests/test_text.py::test_slugify_strips_edge_hyphens
+rationale: slugify already implements lower-case + non-alnum->hyphen + edge-strip. Re-implementing that
+  regex inline is a textbook Type-3 clone.
+gold_files:
+- src/redundra_utils/webhelpers.py
+test_files:
+- tests/test_webhelpers.py

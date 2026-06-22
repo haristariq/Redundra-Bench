@@ -1,0 +1,15 @@
+diff --git a/tests/test_progress.py b/tests/test_progress.py
+new file mode 100644
+index 0000000..b7aca97
+--- /dev/null
++++ b/tests/test_progress.py
+@@ -0,0 +1,9 @@
++from redundra_utils.progress import completion_percentage
++
++
++def test_completion_percentage_basic():
++    assert completion_percentage(1, 4) == 25.0
++
++
++def test_completion_percentage_zero_total():
++    assert completion_percentage(0, 0) == 0.0

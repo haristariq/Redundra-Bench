@@ -1,0 +1,24 @@
+id: neg-02-split-sections
+klass: negative
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: null
+tempting_symbol: redundra_utils.collections_util.chunk
+prompt: "Add document sectioning.\n\nCreate a new module `redundra_utils/documents.py` exporting\n`split_sections(doc:\
+  \ str) -> list[str]`. A section is a run of text\nseparated from the next by one or more blank lines\
+  \ (lines that are empty\nor whitespace-only). Return the list of sections with surrounding\nwhitespace\
+  \ stripped from each, dropping any empty sections. Sections\nhave variable length.\n  split_sections('a\\\
+  nb\\n\\nc') -> ['a\\nb', 'c']\n"
+fail_to_pass:
+- tests/test_documents.py::test_split_sections_basic
+- tests/test_documents.py::test_split_sections_multiple_blank_lines
+- tests/test_documents.py::test_split_sections_drops_empty
+pass_to_pass:
+- tests/test_collections_util.py::test_chunk_even_and_remainder
+rationale: '''split into groups'' pattern-matches chunk, but chunk makes fixed-size groups; sections are
+  variable and delimiter-driven. Forcing chunk is a false block.'
+gold_files:
+- src/redundra_utils/documents.py
+test_files:
+- tests/test_documents.py

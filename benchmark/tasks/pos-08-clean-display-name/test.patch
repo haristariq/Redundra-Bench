@@ -1,0 +1,15 @@
+diff --git a/tests/test_accounts.py b/tests/test_accounts.py
+new file mode 100644
+index 0000000..f6c8142
+--- /dev/null
++++ b/tests/test_accounts.py
+@@ -0,0 +1,9 @@
++from redundra_utils.accounts import clean_display_name
++
++
++def test_clean_display_name_collapses():
++    assert clean_display_name('  John\t  Doe \n') == 'John Doe'
++
++
++def test_clean_display_name_already_clean():
++    assert clean_display_name('Jane Roe') == 'Jane Roe'

@@ -1,0 +1,25 @@
+id: ext-02-safe-div-round
+klass: extension
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.numeric.safe_div
+tempting_symbol: null
+prompt: "Extend safe division with optional rounding.\n\nAdd an optional keyword parameter `ndigits: int\
+  \ | None = None` to the\nexisting `redundra_utils.numeric.safe_div` function. When `ndigits` is\nnot\
+  \ None, round the returned value (including the zero-denominator\n`default`) to that many decimal places\
+  \ using the built-in `round`.\nDefault behaviour (ndigits=None) must be unchanged.\n  safe_div(1, 3,\
+  \ ndigits=2) -> 0.33\n  safe_div(3, 4)            -> 0.75\n"
+fail_to_pass:
+- tests/test_numeric_round.py::test_safe_div_rounds_when_ndigits_given
+- tests/test_numeric_round.py::test_safe_div_rounds_default_on_zero
+- tests/test_numeric_round.py::test_safe_div_unchanged_without_ndigits
+pass_to_pass:
+- tests/test_numeric.py::test_safe_div_normal
+- tests/test_numeric.py::test_safe_div_zero_default
+- tests/test_numeric.py::test_safe_div_custom_default
+rationale: Correct answer adds a param to safe_div; a parallel `safe_div_rounded` clone is the anti-pattern.
+gold_files:
+- src/redundra_utils/numeric.py
+test_files:
+- tests/test_numeric_round.py

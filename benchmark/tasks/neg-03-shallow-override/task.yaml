@@ -1,0 +1,26 @@
+id: neg-03-shallow-override
+klass: negative
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: null
+tempting_symbol: redundra_utils.collections_util.deep_merge
+prompt: "Add a flat (shallow) config override.\n\nCreate a new module `redundra_utils/config_flat.py`\
+  \ exporting\n`shallow_override(base: dict, override: dict) -> dict`. It must return a\nnew dict where\
+  \ each top-level key present in `override` REPLACES the\nvalue in `base` wholesale. It must NOT merge\
+  \ nested dictionaries: if a\nkey holds a dict on both sides, the override's dict replaces the base's\n\
+  dict entirely. Inputs must not be mutated.\n  shallow_override({'a': {'x': 1}}, {'a': {'y': 2}}) ->\
+  \ {'a': {'y': 2}}\n"
+fail_to_pass:
+- tests/test_config_flat.py::test_shallow_override_replaces_nested_wholesale
+- tests/test_config_flat.py::test_shallow_override_adds_and_overrides_top_level
+- tests/test_config_flat.py::test_shallow_override_does_not_mutate
+pass_to_pass:
+- tests/test_collections_util.py::test_deep_merge_recursive
+rationale: 'deep_merge is the obvious-looking reuse, but its recursive merge violates the no-merge-nested
+  spec: deep_merge would yield {''a'': {''x'': 1, ''y'': 2}} and fail the wholesale-replacement test.
+  This is the canonical false-block trap.'
+gold_files:
+- src/redundra_utils/config_flat.py
+test_files:
+- tests/test_config_flat.py

@@ -1,0 +1,18 @@
+diff --git a/src/redundra_utils/webhelpers.py b/src/redundra_utils/webhelpers.py
+new file mode 100644
+index 0000000..262f371
+--- /dev/null
++++ b/src/redundra_utils/webhelpers.py
+@@ -0,0 +1,12 @@
++"""Web helpers."""
++
++from __future__ import annotations
++
++from .text import slugify
++
++__all__ = ["make_url_path"]
++
++
++def make_url_path(title: str) -> str:
++    """Return ``title`` as a URL path (e.g. ``/hello-world``)."""
++    return "/" + slugify(title)

@@ -1,0 +1,19 @@
+diff --git a/tests/test_webhelpers.py b/tests/test_webhelpers.py
+new file mode 100644
+index 0000000..bbc7250
+--- /dev/null
++++ b/tests/test_webhelpers.py
+@@ -0,0 +1,13 @@
++from redundra_utils.webhelpers import make_url_path
++
++
++def test_make_url_path_basic():
++    assert make_url_path('Hello, World!') == '/hello-world'
++
++
++def test_make_url_path_collapses_and_strips():
++    assert make_url_path('  Foo --- Bar ') == '/foo-bar'
++
++
++def test_make_url_path_empty_slug():
++    assert make_url_path('!!!') == '/'

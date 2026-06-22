@@ -1,0 +1,18 @@
+diff --git a/src/redundra_utils/accounts.py b/src/redundra_utils/accounts.py
+new file mode 100644
+index 0000000..efcf09e
+--- /dev/null
++++ b/src/redundra_utils/accounts.py
+@@ -0,0 +1,12 @@
++"""Account helpers."""
++
++from __future__ import annotations
++
++from .text import normalize_whitespace
++
++__all__ = ["clean_display_name"]
++
++
++def clean_display_name(raw: str) -> str:
++    """Return ``raw`` with whitespace collapsed and ends stripped."""
++    return normalize_whitespace(raw)

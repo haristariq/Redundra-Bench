@@ -1,0 +1,20 @@
+diff --git a/tests/test_settings.py b/tests/test_settings.py
+new file mode 100644
+index 0000000..d3099e1
+--- /dev/null
++++ b/tests/test_settings.py
+@@ -0,0 +1,14 @@
++from redundra_utils.settings import load_settings
++
++
++def test_load_settings_deep_merge():
++    out = load_settings(
++        {'ui': {'theme': 'light', 'dpi': 96}}, {'ui': {'theme': 'dark'}}
++    )
++    assert out == {'ui': {'theme': 'dark', 'dpi': 96}}
++
++
++def test_load_settings_does_not_mutate():
++    defaults = {'ui': {'dpi': 96}}
++    load_settings(defaults, {'ui': {'theme': 'dark'}})
++    assert defaults == {'ui': {'dpi': 96}}

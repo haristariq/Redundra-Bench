@@ -1,0 +1,22 @@
+diff --git a/tests/test_display.py b/tests/test_display.py
+new file mode 100644
+index 0000000..a2240b5
+--- /dev/null
++++ b/tests/test_display.py
+@@ -0,0 +1,16 @@
++from redundra_utils.display import comment_preview
++
++
++def test_comment_preview_truncates_with_ellipsis():
++    out = comment_preview('hello world', 8)
++    assert out == 'hello w\u2026'
++    assert len(out) == 8
++
++
++def test_comment_preview_short_unchanged():
++    assert comment_preview('hi', 8) == 'hi'
++
++
++def test_comment_preview_default_width():
++    assert comment_preview('x' * 100)[-1] == '\u2026'
++    assert len(comment_preview('x' * 100)) == 80

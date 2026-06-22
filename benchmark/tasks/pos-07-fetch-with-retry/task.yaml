@@ -1,0 +1,33 @@
+id: pos-07-fetch-with-retry
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.retrying.retry
+tempting_symbol: null
+prompt: 'Add a retrying fetch wrapper.
+
+
+  Create a new module `redundra_utils/fetcher.py` exporting
+
+  `fetch_with_retry(fetcher, attempts: int = 3)`. It must call the
+
+  zero-argument `fetcher` and return its result. If `fetcher` raises an
+
+  Exception, it should be retried up to `attempts` total tries; if every
+
+  attempt fails, the exception from the last attempt is re-raised.
+
+  '
+fail_to_pass:
+- tests/test_fetcher.py::test_fetch_with_retry_eventually_succeeds
+- tests/test_fetcher.py::test_fetch_with_retry_reraises_after_exhaustion
+pass_to_pass:
+- tests/test_retrying.py::test_retry_eventually_succeeds
+- tests/test_retrying.py::test_retry_exhausts_and_reraises
+rationale: retry already implements the attempt loop + last-exception re-raise; an inline for/try/except
+  loop is a clone.
+gold_files:
+- src/redundra_utils/fetcher.py
+test_files:
+- tests/test_fetcher.py

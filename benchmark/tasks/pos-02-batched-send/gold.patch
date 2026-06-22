@@ -1,0 +1,26 @@
+diff --git a/src/redundra_utils/notify.py b/src/redundra_utils/notify.py
+new file mode 100644
+index 0000000..28cb934
+--- /dev/null
++++ b/src/redundra_utils/notify.py
+@@ -0,0 +1,20 @@
++"""Notification helpers."""
++
++from __future__ import annotations
++
++from typing import Any, Callable, Iterable
++
++from .collections_util import chunk
++
++__all__ = ["send_in_batches"]
++
++
++def send_in_batches(
++    items: Iterable[Any], size: int, sender: Callable[[list[Any]], Any]
++) -> int:
++    """Send ``items`` to ``sender`` in batches of ``size``; return batch count."""
++    count = 0
++    for batch in chunk(items, size):
++        sender(batch)
++        count += 1
++    return count

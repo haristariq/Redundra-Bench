@@ -1,0 +1,7 @@
+# Harness + analysis dependencies (Python 3.10+).
+pyyaml>=6
+pytest>=7
+numpy>=1.24
+scipy>=1.10
+# The agent under test is the Codex CLI (installed separately); see BENCHMARK.md.
+# Real Redundra MCP server requires Node >=18 (installed separately).

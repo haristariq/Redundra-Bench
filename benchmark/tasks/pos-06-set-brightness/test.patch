@@ -1,0 +1,19 @@
+diff --git a/tests/test_device.py b/tests/test_device.py
+new file mode 100644
+index 0000000..d05c029
+--- /dev/null
++++ b/tests/test_device.py
+@@ -0,0 +1,13 @@
++from redundra_utils.device import set_brightness
++
++
++def test_set_brightness_clamps_high():
++    assert set_brightness(150) == 100
++
++
++def test_set_brightness_clamps_low():
++    assert set_brightness(-5) == 0
++
++
++def test_set_brightness_passthrough():
++    assert set_brightness(50) == 50

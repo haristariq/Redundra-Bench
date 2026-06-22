@@ -1,0 +1,21 @@
+diff --git a/src/redundra_utils/documents.py b/src/redundra_utils/documents.py
+new file mode 100644
+index 0000000..26fba88
+--- /dev/null
++++ b/src/redundra_utils/documents.py
+@@ -0,0 +1,15 @@
++"""Document helpers."""
++
++from __future__ import annotations
++
++import re
++
++__all__ = ["split_sections"]
++
++_BLANK_LINE_RE = re.compile(r"\n\s*\n")
++
++
++def split_sections(doc: str) -> list[str]:
++    """Split ``doc`` into sections separated by blank lines."""
++    parts = _BLANK_LINE_RE.split(doc)
++    return [p.strip() for p in parts if p.strip()]

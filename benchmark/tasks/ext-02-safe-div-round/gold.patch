@@ -1,0 +1,49 @@
+diff --git a/src/redundra_utils/numeric.py b/src/redundra_utils/numeric.py
+index 0585ebe..eb09bb5 100644
+--- a/src/redundra_utils/numeric.py
++++ b/src/redundra_utils/numeric.py
+@@ -2,7 +2,7 @@
+ 
+ from __future__ import annotations
+ 
+-from typing import Union
++from typing import Optional, Union
+ 
+ __all__ = ["clamp", "safe_div"]
+ 
+@@ -28,18 +28,29 @@ def clamp(value: Number, lo: Number, hi: Number) -> Number:
+     return value
+ 
+ 
+-def safe_div(numerator: Number, denominator: Number, default: Number = 0.0) -> Number:
++def safe_div(
++    numerator: Number,
++    denominator: Number,
++    default: Number = 0.0,
++    ndigits: Optional[int] = None,
++) -> Number:
+     """Divide ``numerator`` by ``denominator``, returning ``default`` on zero.
+ 
+-    Avoids ``ZeroDivisionError`` for the common "rate / ratio" case.
++    Avoids ``ZeroDivisionError`` for the common "rate / ratio" case. When
++    ``ndigits`` is given, the result (including ``default``) is rounded to that
++    many decimal places.
+ 
+     >>> safe_div(3, 4)
+     0.75
++    >>> safe_div(1, 3, ndigits=2)
++    0.33
+     >>> safe_div(1, 0)
+     0.0
+-    >>> safe_div(1, 0, default=-1)
+-    -1
+     """
+     if denominator == 0:
+-        return default
+-    return numerator / denominator
++        result: Number = default
++    else:
++        result = numerator / denominator
++    if ndigits is not None:
++        return round(result, ndigits)
++    return result

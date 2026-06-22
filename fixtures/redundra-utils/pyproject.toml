@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "redundra-utils"
+version = "0.1.0"
+description = "Utility-rich fixture library for Redundra-Bench reuse tasks."
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+dependencies = []
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Make `src/` importable without an install step, so the benchmark harness can
+# run tests deterministically in a fresh checkout with no `pip install`.
+pythonpath = ["src"]

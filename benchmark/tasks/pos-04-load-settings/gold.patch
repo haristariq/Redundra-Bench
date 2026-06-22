@@ -1,0 +1,20 @@
+diff --git a/src/redundra_utils/settings.py b/src/redundra_utils/settings.py
+new file mode 100644
+index 0000000..aa4e82b
+--- /dev/null
++++ b/src/redundra_utils/settings.py
+@@ -0,0 +1,14 @@
++"""Settings loading."""
++
++from __future__ import annotations
++
++from typing import Any, Mapping
++
++from .collections_util import deep_merge
++
++__all__ = ["load_settings"]
++
++
++def load_settings(defaults: Mapping[str, Any], user: Mapping[str, Any]) -> dict:
++    """Return ``defaults`` with ``user`` layered on top (deep merge)."""
++    return deep_merge(defaults, user)

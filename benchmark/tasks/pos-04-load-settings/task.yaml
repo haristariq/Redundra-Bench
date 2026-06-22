@@ -1,0 +1,24 @@
+id: pos-04-load-settings
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.collections_util.deep_merge
+tempting_symbol: null
+prompt: "Add layered settings loading.\n\nCreate a new module `redundra_utils/settings.py` exporting\n\
+  `load_settings(defaults: dict, user: dict) -> dict`. It returns a new\nsettings dict where `user` values\
+  \ override `defaults`. When both sides\nhold a dict under the same key, the nested dicts must be merged\n\
+  recursively (not replaced). Inputs must not be mutated.\n  load_settings({'ui': {'theme': 'light', 'dpi':\
+  \ 96}},\n                {'ui': {'theme': 'dark'}})\n    -> {'ui': {'theme': 'dark', 'dpi': 96}}\n"
+fail_to_pass:
+- tests/test_settings.py::test_load_settings_deep_merge
+- tests/test_settings.py::test_load_settings_does_not_mutate
+pass_to_pass:
+- tests/test_collections_util.py::test_deep_merge_recursive
+- tests/test_collections_util.py::test_deep_merge_does_not_mutate_inputs
+rationale: deep_merge already does non-mutating recursive merge; an inline recursive merge is a Type-3/4
+  clone.
+gold_files:
+- src/redundra_utils/settings.py
+test_files:
+- tests/test_settings.py

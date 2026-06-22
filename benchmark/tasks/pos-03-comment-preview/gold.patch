@@ -1,0 +1,18 @@
+diff --git a/src/redundra_utils/display.py b/src/redundra_utils/display.py
+new file mode 100644
+index 0000000..0169338
+--- /dev/null
++++ b/src/redundra_utils/display.py
+@@ -0,0 +1,12 @@
++"""Display helpers."""
++
++from __future__ import annotations
++
++from .text import truncate
++
++__all__ = ["comment_preview"]
++
++
++def comment_preview(body: str, width: int = 80) -> str:
++    """Return a single-line preview of ``body`` at most ``width`` chars."""
++    return truncate(body, width)

@@ -1,0 +1,55 @@
+{
+  "run_id": "phase0",
+  "n_runs": 195,
+  "per_arm": {
+    "null-mcp": {
+      "runs": 65,
+      "pass_rate": 1.0,
+      "reuse_rate": 0.84,
+      "false_block_rate": 0.0,
+      "median_loc_added": 22,
+      "median_turns": 1,
+      "median_total_tokens": 95504,
+      "median_cost_usd": 0.0,
+      "median_wall_s": 41.8,
+      "redundra_tool_calls_total": 0
+    },
+    "with-redundra": {
+      "runs": 65,
+      "pass_rate": 1.0,
+      "reuse_rate": 1.0,
+      "false_block_rate": 0.0,
+      "median_loc_added": 16,
+      "median_turns": 1,
+      "median_total_tokens": 115444,
+      "median_cost_usd": 0.0,
+      "median_wall_s": 51.1,
+      "redundra_tool_calls_total": 117
+    },
+    "without-redundra": {
+      "runs": 65,
+      "pass_rate": 1.0,
+      "reuse_rate": 0.78,
+      "false_block_rate": 0.0,
+      "median_loc_added": 18,
+      "median_turns": 1,
+      "median_total_tokens": 80397,
+      "median_cost_usd": 0.0,
+      "median_wall_s": 35.7,
+      "redundra_tool_calls_total": 0
+    }
+  },
+  "token_delta": {
+    "tasks_paired": 13,
+    "baseline_mean_tokens": 90453.8,
+    "treatment_mean_tokens": 120866.6,
+    "mean_delta_tokens": 30412.8,
+    "mean_delta_ci95": [
+      23969.5,
+      37733.3
+    ],
+    "median_pct_change": 37.54,
+    "wilcoxon_stat": 0.0,
+    "wilcoxon_p": 0.00024
+  }
+}

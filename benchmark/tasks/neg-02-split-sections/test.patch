@@ -1,0 +1,19 @@
+diff --git a/tests/test_documents.py b/tests/test_documents.py
+new file mode 100644
+index 0000000..3055733
+--- /dev/null
++++ b/tests/test_documents.py
+@@ -0,0 +1,13 @@
++from redundra_utils.documents import split_sections
++
++
++def test_split_sections_basic():
++    assert split_sections('a\nb\n\nc') == ['a\nb', 'c']
++
++
++def test_split_sections_multiple_blank_lines():
++    assert split_sections('one\n\n\n\ntwo') == ['one', 'two']
++
++
++def test_split_sections_drops_empty():
++    assert split_sections('\n\n  \n\nonly') == ['only']

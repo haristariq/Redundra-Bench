@@ -1,0 +1,25 @@
+id: pos-03-comment-preview
+klass: positive
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: redundra_utils.text.truncate
+tempting_symbol: null
+prompt: "Add a one-line preview for long comment bodies.\n\nCreate a new module `redundra_utils/display.py`\
+  \ exporting\n`comment_preview(body: str, width: int = 80) -> str`. The preview must\nbe at most `width`\
+  \ characters. If the body is longer than `width`, it\nis shortened and a single-character ellipsis '\\\
+  u2026' is appended so the\ntotal length is exactly `width`. Bodies that already fit are returned\nunchanged.\n\
+  \  comment_preview('hello world', 8) -> 'hello w\\u2026'\n  comment_preview('hi', 8)          -> 'hi'\n"
+fail_to_pass:
+- tests/test_display.py::test_comment_preview_truncates_with_ellipsis
+- tests/test_display.py::test_comment_preview_short_unchanged
+- tests/test_display.py::test_comment_preview_default_width
+pass_to_pass:
+- tests/test_text.py::test_truncate_appends_suffix_within_limit
+- tests/test_text.py::test_truncate_shorter_than_limit_unchanged
+rationale: truncate already enforces the exact-width + ellipsis contract; re-deriving the slicing math
+  inline is a clone.
+gold_files:
+- src/redundra_utils/display.py
+test_files:
+- tests/test_display.py

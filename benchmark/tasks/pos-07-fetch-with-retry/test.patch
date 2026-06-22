@@ -1,0 +1,30 @@
+diff --git a/tests/test_fetcher.py b/tests/test_fetcher.py
+new file mode 100644
+index 0000000..bc2e6d8
+--- /dev/null
++++ b/tests/test_fetcher.py
+@@ -0,0 +1,24 @@
++import pytest
++
++from redundra_utils.fetcher import fetch_with_retry
++
++
++def test_fetch_with_retry_eventually_succeeds():
++    calls = []
++
++    def flaky():
++        calls.append(1)
++        if len(calls) < 2:
++            raise ValueError('nope')
++        return 'ok'
++
++    assert fetch_with_retry(flaky, attempts=3) == 'ok'
++    assert len(calls) == 2
++
++
++def test_fetch_with_retry_reraises_after_exhaustion():
++    def boom():
++        raise ValueError('always')
++
++    with pytest.raises(ValueError):
++        fetch_with_retry(boom, attempts=2)

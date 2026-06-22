@@ -1,0 +1,25 @@
+diff --git a/tests/test_config_flat.py b/tests/test_config_flat.py
+new file mode 100644
+index 0000000..6f5ca94
+--- /dev/null
++++ b/tests/test_config_flat.py
+@@ -0,0 +1,19 @@
++from redundra_utils.config_flat import shallow_override
++
++
++def test_shallow_override_replaces_nested_wholesale():
++    # The key behavioural difference from a deep merge: nested dict is
++    # REPLACED, not merged.
++    assert shallow_override({'a': {'x': 1}}, {'a': {'y': 2}}) == {'a': {'y': 2}}
++
++
++def test_shallow_override_adds_and_overrides_top_level():
++    assert shallow_override({'a': 1, 'b': 2}, {'b': 3, 'c': 4}) == {
++        'a': 1, 'b': 3, 'c': 4
++    }
++
++
++def test_shallow_override_does_not_mutate():
++    base = {'a': {'x': 1}}
++    shallow_override(base, {'a': {'y': 2}})
++    assert base == {'a': {'x': 1}}

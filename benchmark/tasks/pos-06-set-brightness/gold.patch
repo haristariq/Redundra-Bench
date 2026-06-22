@@ -1,0 +1,18 @@
+diff --git a/src/redundra_utils/device.py b/src/redundra_utils/device.py
+new file mode 100644
+index 0000000..ff9d365
+--- /dev/null
++++ b/src/redundra_utils/device.py
+@@ -0,0 +1,12 @@
++"""Device helpers."""
++
++from __future__ import annotations
++
++from .numeric import clamp
++
++__all__ = ["set_brightness"]
++
++
++def set_brightness(level: int) -> int:
++    """Return ``level`` constrained to the inclusive 0..100 range."""
++    return clamp(level, 0, 100)

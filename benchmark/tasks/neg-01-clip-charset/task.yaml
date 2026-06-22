@@ -1,0 +1,23 @@
+id: neg-01-clip-charset
+klass: negative
+repo: redundra-utils
+base_ref: base-v0.1.0
+base_sha: a5f0498dd81e7fa6ff6b2e3cf3604a8903d7105e
+reuse_target: null
+tempting_symbol: redundra_utils.numeric.clamp
+prompt: "Add character-set filtering for sanitizing identifiers.\n\nCreate a new module `redundra_utils/sanitize.py`\
+  \ exporting\n`clip_to_charset(text: str, allowed: str) -> str`. It must return a copy\nof `text` with\
+  \ every character that is NOT in `allowed` removed, preserving the order of the remaining characters.\n\
+  \  clip_to_charset('a1b2c3', 'abc') -> 'abc'\n  clip_to_charset('hello!', 'helo') -> 'hello'\n"
+fail_to_pass:
+- tests/test_sanitize.py::test_clip_to_charset_filters
+- tests/test_sanitize.py::test_clip_to_charset_preserves_order_and_dupes
+- tests/test_sanitize.py::test_clip_to_charset_empty_allowed
+pass_to_pass:
+- tests/test_numeric.py::test_clamp_within_range
+rationale: '''clip'' looks like numeric.clamp, but clamp constrains a number to [lo,hi]; this filters
+  characters. Forcing clamp here is a false block (and cannot pass tests).'
+gold_files:
+- src/redundra_utils/sanitize.py
+test_files:
+- tests/test_sanitize.py

@@ -1,0 +1,18 @@
+diff --git a/src/redundra_utils/config_flat.py b/src/redundra_utils/config_flat.py
+new file mode 100644
+index 0000000..fd13f83
+--- /dev/null
++++ b/src/redundra_utils/config_flat.py
+@@ -0,0 +1,12 @@
++"""Flat config override."""
++
++from __future__ import annotations
++
++from typing import Any, Mapping
++
++__all__ = ["shallow_override"]
++
++
++def shallow_override(base: Mapping[str, Any], override: Mapping[str, Any]) -> dict:
++    """Return ``base`` with top-level keys replaced by ``override`` (no recursion)."""
++    return {**base, **override}

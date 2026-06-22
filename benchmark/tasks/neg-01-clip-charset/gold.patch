@@ -1,0 +1,17 @@
+diff --git a/src/redundra_utils/sanitize.py b/src/redundra_utils/sanitize.py
+new file mode 100644
+index 0000000..b2dd2d4
+--- /dev/null
++++ b/src/redundra_utils/sanitize.py
+@@ -0,0 +1,11 @@
++"""Sanitization helpers."""
++
++from __future__ import annotations
++
++__all__ = ["clip_to_charset"]
++
++
++def clip_to_charset(text: str, allowed: str) -> str:
++    """Return ``text`` with characters not in ``allowed`` removed."""
++    allowed_set = set(allowed)
++    return "".join(ch for ch in text if ch in allowed_set)

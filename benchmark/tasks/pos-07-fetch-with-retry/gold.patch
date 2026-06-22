@@ -1,0 +1,22 @@
+diff --git a/src/redundra_utils/fetcher.py b/src/redundra_utils/fetcher.py
+new file mode 100644
+index 0000000..c1c1d18
+--- /dev/null
++++ b/src/redundra_utils/fetcher.py
+@@ -0,0 +1,16 @@
++"""Fetch helpers."""
++
++from __future__ import annotations
++
++from typing import Callable, TypeVar
++
++from .retrying import retry
++
++__all__ = ["fetch_with_retry"]
++
++T = TypeVar("T")
++
++
++def fetch_with_retry(fetcher: Callable[[], T], attempts: int = 3) -> T:
++    """Call ``fetcher`` with up to ``attempts`` retries on Exception."""
++    return retry(fetcher, attempts=attempts)

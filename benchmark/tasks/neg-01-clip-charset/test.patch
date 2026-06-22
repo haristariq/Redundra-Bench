@@ -1,0 +1,19 @@
+diff --git a/tests/test_sanitize.py b/tests/test_sanitize.py
+new file mode 100644
+index 0000000..a90e5e2
+--- /dev/null
++++ b/tests/test_sanitize.py
+@@ -0,0 +1,13 @@
++from redundra_utils.sanitize import clip_to_charset
++
++
++def test_clip_to_charset_filters():
++    assert clip_to_charset('a1b2c3', 'abc') == 'abc'
++
++
++def test_clip_to_charset_preserves_order_and_dupes():
++    assert clip_to_charset('hello!', 'helo') == 'hello'
++
++
++def test_clip_to_charset_empty_allowed():
++    assert clip_to_charset('abc', '') == ''

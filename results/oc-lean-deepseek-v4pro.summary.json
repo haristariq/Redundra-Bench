@@ -1,0 +1,43 @@
+{
+  "run_id": "oc-lean",
+  "n_runs": 78,
+  "per_arm": {
+    "with-redundra": {
+      "runs": 39,
+      "pass_rate": 0.949,
+      "reuse_rate": 0.667,
+      "false_block_rate": 0.0,
+      "median_loc_added": 15,
+      "median_turns": 14,
+      "median_total_tokens": 43495,
+      "median_cost_usd": 0.867,
+      "median_wall_s": 54.7,
+      "redundra_tool_calls_total": 64
+    },
+    "without-redundra": {
+      "runs": 39,
+      "pass_rate": 0.897,
+      "reuse_rate": 0.367,
+      "false_block_rate": 0.0,
+      "median_loc_added": 11,
+      "median_turns": 10,
+      "median_total_tokens": 38215,
+      "median_cost_usd": 0.7474,
+      "median_wall_s": 40.3,
+      "redundra_tool_calls_total": 0
+    }
+  },
+  "token_delta": {
+    "tasks_paired": 13,
+    "baseline_mean_tokens": 41326.5,
+    "treatment_mean_tokens": 47817.6,
+    "mean_delta_tokens": 6491.1,
+    "mean_delta_ci95": [
+      -1549.9,
+      13726.7
+    ],
+    "median_pct_change": 35.65,
+    "wilcoxon_stat": 23.0,
+    "wilcoxon_p": 0.1272
+  }
+}

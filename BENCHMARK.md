@@ -98,6 +98,11 @@ entrypoint with `REDUNDRA_SERVER_JS=/path/to/dist/mcp/server.js`; the default as
 sibling `redundra` checkout next to this repository. Set `BENCH_USE_STUB=1` to use the
 bundled offline reference stub instead of an external server.
 
+All published results were generated against the real Redundra MCP server, not the stub.
+The stub (`benchmark/mcp/redundra_stub.py`) exists only so the harness is runnable without
+the real server and so other reuse layers can be benchmarked on the same tasks. It is
+opt-in via `BENCH_USE_STUB=1`.
+
 ### Configuration knobs (environment variables)
 
 `BENCH_PROVIDER` (`codex` or `openrouter`), `BENCH_MODEL`, `BENCH_REASONING_EFFORT` (held

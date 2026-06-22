@@ -79,6 +79,12 @@ The only difference between arms is the MCP attachment. The "with" arm runs the 
 reuse layer as an MCP server; the "null control" arm runs an equal-length irrelevant MCP
 server to isolate prompt-length effects from behavior.
 
+All published results in this repository were generated against the real Redundra MCP
+server. The repo also ships a small offline reference stub
+(`benchmark/mcp/redundra_stub.py`) so the harness can run without the real server, or so
+you can benchmark a different reuse layer. The stub is opt-in (`BENCH_USE_STUB=1`) and was
+not used for any published number.
+
 Every task is validated SWE-bench style before any agent runs: the gold solution must
 make the hidden tests pass, the empty solution must fail them (so the task is non-trivial),
 and the reuse verdict on the gold diff must match the task class.

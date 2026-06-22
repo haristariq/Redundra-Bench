@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-"""Redundra MCP stub server (reference implementation for the benchmark).
+"""Redundra MCP stub server (offline reference implementation).
+
+NOTE: This stub was NOT used for any published result. Every published run drove
+the real Redundra MCP server (the default). This stub exists only so the harness
+can run end-to-end without the real server, and so others can benchmark their own
+reuse layer against the same tasks. It is opt-in via BENCH_USE_STUB=1.
 
 Exposes a single tool, ``find_reuse_candidates``, that searches the existing
 public symbols of the project on the agent's PYTHONPATH and returns candidates
 the agent could reuse instead of re-implementing. This mimics what the real
-Redundra MCP does (surface in-repo reuse opportunities) so the `with-redundra`
-arm is runnable end-to-end.
+Redundra MCP does (surface in-repo reuse opportunities).
 
-To benchmark the REAL Redundra instead of this stub, point the with-redundra
-config at it via REDUNDRA_MCP_CMD / REDUNDRA_MCP_ARGS (see setup_codex_home.py).
-
-The server introspects whatever package is importable; the harness sets
-PYTHONPATH to the task worktree's ``src/`` so it sees the live fixture.
+To benchmark the real Redundra (the default), set REDUNDRA_SERVER_JS to its built
+server module; see BENCHMARK.md. The stub introspects whatever package is
+importable; the harness sets PYTHONPATH to the task worktree's ``src/``.
 """
 
 from __future__ import annotations
